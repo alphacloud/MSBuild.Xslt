@@ -3,18 +3,18 @@
   <metadata minClientVersion="2.8">
     <id>Alphacloud.MSBuild.Xslt</id>
     <version>0.1.0.0</version>
-    <title>XSLT 3 transformation for MSBuild.</title>
+    <title>XSLT 3 transformations for MSBuild</title>
     <authors>Alphaclod.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/alphacloud/MSBuild.Xslt</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>XSTL 3 transformation for MSBuild.</description>
+    <description>XSLT 3 transformation for MSBuild (based on SAXON-HE).</description>
     <releaseNotes>
 First beta.
     </releaseNotes>
     <copyright>Copyright (c) 2016-2016 Alphacloud.net</copyright>
-    <tags>alphacloud msbuild xslt xslt-3 xml</tags>
+    <tags>msbuild xslt xslt-3 xml alphacloud</tags>
     <frameworkAssemblies></frameworkAssemblies>
     <dependencies></dependencies>
   </metadata>
