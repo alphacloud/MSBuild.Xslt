@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DuplicatesReport ToolsVersion="104.0.20151218.122648">
+  <Statistics>
+    <CodebaseCost>38563</CodebaseCost>
+    <TotalDuplicatesCost>223</TotalDuplicatesCost>
+    <TotalFragmentsCost>446</TotalFragmentsCost>
+  </Statistics>
+  <Duplicates>
+    <Duplicate Cost="81">
+      <Fragment>
+        <FileName>SharpArch.Web.Mvc.Castle\WindsorPropertyInjectionExtensions.cs</FileName>
+        <OffsetRange Start="1657" End="1886"></OffsetRange>
+        <LineRange Start="39" End="44"></LineRange>
+        <Text>if (kernel == null)
+                throw new ArgumentNullException(nameof(kernel));
+            if (target == null)
+                throw new ArgumentNullException(nameof(target));
+
+            Type type = target.GetType();</Text>
+      </Fragment>
+      <Fragment>
+        <FileName>SharpArch.Web.Mvc.Castle\WindsorPropertyInjectionExtensions.cs</FileName>
+        <OffsetRange Start="3888" End="4117"></OffsetRange>
+        <LineRange Start="84" End="89"></LineRange>
+        <Text>if (kernel == null)
+                throw new ArgumentNullException(nameof(kernel));
+            if (target == null)
+                throw new ArgumentNullException(nameof(target));
+
+            Type type = target.GetType();</Text>
+      </Fragment>
+    </Duplicate>
+    <Duplicate Cost="71">
+      <Fragment>
+        <FileName>SharpArch.NHibernate\NHibernateRepositoryWithTypedId.cs</FileName>
+        <OffsetRange Start="3860" End="4127"></OffsetRange>
+        <LineRange Start="107" End="117"></LineRange>
+        <Text>if (foundList.Count &gt; 1)
+            {
+                throw new NonUniqueResultException(foundList.Count);
+            }
+
+            if (foundList.Count == 1)
+            {
+                return foundList[0];
+            }
+
+            return default(T);</Text>
+      </Fragment>
+      <Fragment>
+        <FileName>SharpArch.NHibernate\NHibernateRepositoryWithTypedId.cs</FileName>
+        <OffsetRange Start="4317" End="4584"></OffsetRange>
+        <LineRange Start="124" End="134"></LineRange>
+        <Text>if (foundList.Count &gt; 1)
+            {
+                throw new NonUniqueResultException(foundList.Count);
+            }
+
+            if (foundList.Count == 1)
+            {
+                return foundList[0];
+            }
+
+            return default(T);</Text>
+      </Fragment>
+    </Duplicate>
+    <Duplicate Cost="71">
+      <Fragment>
+        <FileName>SharpArch.NHibernate\NHibernateValidator\DataAnnotationsEventListener.cs</FileName>
+        <OffsetRange Start="1029" End="1294"></OffsetRange>
+        <LineRange Start="37" End="44"></LineRange>
+        <Text>{
+            if (@event.Entity is ValidatableObject)
+            {
+                var entity = @event.Entity;
+                Validator.ValidateObject(entity, CreateValidationContext(@event, entity), true);
+            }
+            return false;
+        }</Text>
+      </Fragment>
+      <Fragment>
+        <FileName>SharpArch.NHibernate\NHibernateValidator\DataAnnotationsEventListener.cs</FileName>
+        <OffsetRange Start="1588" End="1853"></OffsetRange>
+        <LineRange Start="52" End="59"></LineRange>
+        <Text>{
+            if (@event.Entity is ValidatableObject)
+            {
+                var entity = @event.Entity;
+                Validator.ValidateObject(entity, CreateValidationContext(@event, entity), true);
+            }
+            return false;
+        }</Text>
+      </Fragment>
+    </Duplicate>
+  </Duplicates>
+</DuplicatesReport>

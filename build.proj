@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="BuildAll" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <BuildTarget Condition="'$(BuildTarget)' == ''">Rebuild</BuildTarget>
+    <BuildConfig Condition="'$(BuildConfig)' == ''">Debug</BuildConfig>
+  </PropertyGroup>
+
+  <!-- Directories -->
+  <PropertyGroup>
+	<SolutionName>Alphacloud.MSBuild.Xslt</SolutionName>
+  </PropertyGroup>
+  
+  <!-- calculated properties -->
+  <PropertyGroup>
+    <RootDir>$(MSBuildProjectDirectory)</RootDir>
+    <SrcDir>$(RootDir)\src</SrcDir>
+	<TestsDir>$(SrcDir}\tests</TestsDir>
+	<BuildToolsDir>$(SrcDir)\.build</BuildToolsDir>
+    <NuGetExe>$(BuildToolsDir)\NuGet.exe</NuGetExe>
+	
+    <OutputDir>$(RootDir)\out</OutputDir>
+    <PackagesOutDir>$(OutputDir)\packages</PackagesOutDir>
+    <PackagesSrcDir>$(OutputDir)\nuget</PackagesSrcDir>
+
+	<MainSolution>$(SrcDir)\$(SolutionName).sln</MainSolution>
+  </PropertyGroup>
+
+  <!-- imports -->
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(BuildToolsDir)</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets" />
+  <Import Project="$(RootDir)\PackageDefinitions.xml" />
+    
+  <Target Name="RestorePackages">
+	<Exec WorkingDirectory="$(SrcDir)"
+	  Command="$(NuGetExe) restore $(SolutionName).sln" />
+  </Target>
+  
+  <Target Name="CleanAll">
+	<Message Text="Performing full clean-up..." />
+    <MSBuild Projects="$(MainSolution)" Properties="Configuration=Debug" Targets="Clean"  BuildInParallel="true" />
+    <MSBuild Projects="$(MainSolution)" Properties="Configuration=Release" Targets="Clean" BuildInParallel="true" />
+    <DeleteTree Directories="$(SrcDir)\**\bin\**;$(SrcDir)\**\obj\**;$(OutputDir);$(RootDir)\packages\**" />
+  </Target>
+  
+  <Target Name="CreateFolders">
+    <MakeDir Directories="$(PackagesOutDir);$(PackagesSrcDir)" />
+  </Target>
+
+  <Target Name="UpdateVersionInfo">
+    <Message Text="Updating %(PackageDefinition.Identity), version: %(PackageDefinition.Version)" />
+    <Time>
+      <Output TaskParameter="Year" PropertyName="CurrentYear" />
+    </Time>
+
+    <FileUpdate Files="%(PackageDefinition.RootFolder)\Properties\AssemblyInfo.cs"
+      WarnOnNoUpdate="true"
+      Regex="((?:AssemblyVersion|AssemblyFileVersion)\s*\(\s*)\&quot;(.+)\&quot;(\s*\))"
+      ReplacementText="$1&quot;%(PackageDefinition.Version)&quot;$3" />
+    <XmlUpdate
+      Prefix="nu" Namespace="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd"
+      XmlFileName="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)"
+      XPath="/nu:package/nu:metadata/nu:version"
+      Value="%(PackageDefinition.Version)" />
+    <XmlUpdate
+      Prefix="nu" Namespace="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd"
+      XmlFileName="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)"
+      XPath="/nu:package/nu:metadata/nu:copyright"
+      Value="Copyright (c) 2016-$(CurrentYear) Alphacloud.net" />
+  </Target>
+
+  <Target Name="BuildPackages">
+    <RemoveDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
+    <MakeDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
+    
+    <Message Text="##teamcity[progressMessage 'Building NuGet packages...']" />
+    
+    <Copy 
+      SourceFiles="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)" 
+      DestinationFiles="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" 
+      UseHardlinksIfPossible="false" OverwriteReadOnlyFiles="true" Retries="5"
+    />
+    
+    <ItemGroup>
+      <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\*.*;"
+		Exclude="$(SrcDir)\solution\bin\Release\*.pdb;$(SrcDir)\solution\bin\Release\*.xml;$(SrcDir)\solution\bin\Release\Jetbrains.*.*"
+		>
+          <NuspecDir>%(PackageDefinition.Identity)\tools\</NuspecDir>
+      </PackageFiles>
+    </ItemGroup>
+    
+    <!-- set dependency version in NuSpec files -->
+    <ItemGroup>
+        <NuSpecFiles Include="$(PackagesSrcDir)\**\*.nuspec">
+        </NuSpecFiles>
+    </ItemGroup>
+
+    <FileUpdate Files="@(NuSpecFiles)"
+        Regex="%Version\(%(PackageDefinition.Identity)\)"
+        ReplacementText="%(PackageDefinition.Version)"
+        
+    />
+    
+    <Copy 
+      SourceFiles="@(PackageFiles)" 
+      DestinationFolder="$(PackagesSrcDir)\%(PackageFiles.NuspecDir)\" 
+      UseHardlinksIfPossible="true" OverwriteReadOnlyFiles="true" Retries="5"
+    />
+  
+    <NuGetPack File="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" OutputDirectory="$(PackagesOutDir)" />
+  </Target>
+    
+
+  
+  <Target Name="BuildAll" DependsOnTargets="RestorePackages">
+    <MSBuild Projects="$(MainSolution)" Properties="Configuration=$(BuildConfig);CreateHardLinksForCopyLocalIfPossible=true" Targets="$(BuildTarget)"
+             BuildInParallel="true" />
+  </Target>
+
+</Project>

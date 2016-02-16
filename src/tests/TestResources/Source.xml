@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <settings>
+    <add name="name1" value="value1" />
+  </settings>
+</root>

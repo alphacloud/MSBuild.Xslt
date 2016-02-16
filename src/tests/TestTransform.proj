@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+
+<Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0"
+   DefaultTargets="SimpleTransform">
+
+  <UsingTask TaskName="Xslt3SingleFileTransform" AssemblyFile="$(MSBuildThisFileDirectory)Alphacloud.MSBuild.Xslt.dll" />
+
+  <ItemGroup>
+    <XsltTemplate Include="..\..\TestResources\Transform1.xslt">
+      <Version>0.1</Version>
+    </XsltTemplate>
+  </ItemGroup>
+  
+  <Target Name="SimpleTransform">
+
+    <Xslt3SingleFileTransform
+      Xslt="@(XsltTemplate)" Input="..\..\TestResources\Source.xml"
+      Output="res1.xml">
+      
+    </Xslt3SingleFileTransform>
+  </Target>
+  
+</Project>
