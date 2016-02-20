@@ -4,7 +4,7 @@
     <id>Alphacloud.MSBuild.Xslt</id>
     <version>0.1.0.0</version>
     <title>XSLT 3 transformation for MSBuild.</title>
-    <authors>Alphaclod.net</authors>
+    <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/alphacloud/MSBuild.Xslt</projectUrl>
