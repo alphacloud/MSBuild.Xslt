@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISingleFileTransformer.cs" />
     <Compile Include="Xslt3SingleFileTransform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleFileTransformer.cs" />

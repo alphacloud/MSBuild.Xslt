@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.8">
     <id>Alphacloud.MSBuild.Xslt</id>
-    <version>0.1.0.0</version>
-    <title>XSLT 3 transformations for MSBuild</title>
-    <authors>Alphaclod.net</authors>
+    <version>0.2.0.0</version>
+    <title>XSLT 3 transformations for MSBuild.</title>
+    <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/alphacloud/MSBuild.Xslt</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>XSLT 3 transformation for MSBuild (based on SAXON-HE).</description>
+    <description>XSLT 3 transformations for MSBuild (based on SAXON-HE).</description>
     <releaseNotes>
-First beta.
+XML encoding fixes.
     </releaseNotes>
     <copyright>Copyright (c) 2016-2016 Alphacloud.net</copyright>
     <tags>msbuild xslt xslt-3 xml alphacloud</tags>
