@@ -72,7 +72,7 @@
       Value="Copyright (c) 2016-$(CurrentYear) Alphacloud.net" />
   </Target>
 
-  <Target Name="BuildPackages">
+  <Target Name="Package">
     <RemoveDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     <MakeDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     
