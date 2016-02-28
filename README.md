@@ -6,6 +6,7 @@ This is **tools** package, i.e. no assembly references are added to .NET project
 
 Project is based on [Saxon-HE](http://nuget.org/List/Packages/Saxon-HE).
 
+[![Master branch build](https://ci.appveyor.com/api/projects/status/github/alphacloud/MSBuild.Xslt?branch=master&svg=true)](https://ci.appveyor.com/project/shatl/msbuild-xslt)
 
 ## Installation 
 
