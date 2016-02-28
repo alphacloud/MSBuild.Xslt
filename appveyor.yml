@@ -32,7 +32,7 @@ deploy:
 
   api_key:
 
-    secure: QzSLSnRAnpTRqWWhDzHNkHJP6RCd5pwWMv0myf88h0OCk0TTPJdhflsDql3kAlip
+    secure: yHJuxI0TVZU+g90YoGwOm8Zug7bxKNibC84NLkLusrMMNMcR86qizmvJR81KHtCS
 
   on:
 
