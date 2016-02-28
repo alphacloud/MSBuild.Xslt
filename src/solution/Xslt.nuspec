@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XSTL 3 transformation for MSBuild.</description>
     <releaseNotes>
-XML encoding fixes.
+Detailed error logging.
     </releaseNotes>
     <copyright>Copyright (c) 2016-2016 Alphacloud.net</copyright>
     <tags>alphacloud msbuild xslt xslt-3 xml</tags>

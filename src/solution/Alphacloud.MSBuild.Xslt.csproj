@@ -59,10 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="ISingleFileTransformer.cs" />
     <Compile Include="Xslt3SingleFileTransform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleFileTransformer.cs" />
+    <Compile Include="XsltException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alphacloud.MSBuild.Xslt.targets">

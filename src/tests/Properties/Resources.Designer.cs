@@ -62,6 +62,27 @@ namespace Alphacloud.MSBuild.Xslt.Tests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///
+        ///&lt;!-- origin: https://gist.github.com/st-gwerner/6675196 --&gt;
+        ///&lt;xsl:stylesheet version=&quot;3.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
+        ///  &lt;xsl:output method=&quot;html&quot; version=&quot;5.0&quot; indent=&quot;yes&quot; /&gt;
+        ///
+        ///  &lt;xsl:key name=&quot;issue-lookup&quot; select=&quot;//IssueTypes/IssueType&quot; /&gt;
+        ///  
+        ///  &lt;xsl:template match=&quot;/Report&quot;&gt;
+        ///    &lt;html&gt;
+        ///      &lt;head&gt;
+        ///        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        ///        &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bo [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string BrokenTransform {
+            get {
+                return ResourceManager.GetString("BrokenTransform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;DuplicatesReport ToolsVersion=&quot;104.0.20151218.122648&quot;&gt;
         ///  &lt;Statistics&gt;
         ///    &lt;CodebaseCost&gt;38563&lt;/CodebaseCost&gt;
@@ -118,18 +139,18 @@ namespace Alphacloud.MSBuild.Xslt.Tests.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;
-        ///    xmlns:msxsl=&quot;urn:schemas-microsoft-com:xslt&quot; exclude-result-prefixes=&quot;msxsl&quot;
-        ///&gt;
+        ///    xmlns:msxsl=&quot;urn:schemas-microsoft-com:xslt&quot; exclude-result-prefixes=&quot;msxsl&quot;&gt;
         ///    &lt;xsl:output method=&quot;xml&quot; indent=&quot;yes&quot;/&gt;
         ///
+        ///  &lt;xsl:param name=&quot;Version&quot; /&gt;
+        ///  
         ///    &lt;xsl:template match=&quot;/&quot;&gt;
-        ///      &lt;configuration&gt;
+        ///      &lt;xsl:element name=&quot;configuration&quot;&gt;
+        ///        &lt;xsl:attribute name=&quot;version&quot;&gt;
+        ///          &lt;xsl:value-of select=&quot;$Version&quot;/&gt;
+        ///        &lt;/xsl:attribute&gt;
         ///        &lt;settings&gt;
-        ///          &lt;xsl:for-each select=&quot;//root/settings/add&quot;&gt;
-        ///            &lt;xsl:element name=&quot;pair&quot;&gt;
-        ///              &lt;xsl:element name=&quot;key&quot;&gt;
-        ///                &lt;xsl:value-of select=&quot;@name&quot;/&gt;
-        ///      [rest of string was truncated]&quot;;.
+        ///          &lt;xsl:for-each [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string XsltTransform1 {
             get {

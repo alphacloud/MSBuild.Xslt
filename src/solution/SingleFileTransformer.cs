@@ -4,8 +4,10 @@
 namespace Alphacloud.MSBuild.Xslt
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using JetBrains.Annotations;
     using Saxon.Api;
 
@@ -16,7 +18,7 @@ namespace Alphacloud.MSBuild.Xslt
     internal class SingleFileTransformer : ISingleFileTransformer
     {
         private static readonly Lazy<Processor> s_processor = new Lazy<Processor>(CreateProcessor);
-        private static readonly Lazy<XsltCompiler> s_xsltCompiler = new Lazy<XsltCompiler>(CreateCompiler);
+        private readonly XsltCompiler _xsltCompiler = CreateCompiler();
         private readonly Dictionary<QName, XdmValue> _externalParameters = new Dictionary<QName, XdmValue>();
         private Xslt30Transformer _xslt30Transformer;
 
@@ -29,9 +31,19 @@ namespace Alphacloud.MSBuild.Xslt
         public void LoadXslt([NotNull] Stream xslt)
         {
             if (xslt == null) throw new ArgumentNullException(nameof(xslt));
-
-            var xsltExecutable = s_xsltCompiler.Value.Compile(xslt);
-            _xslt30Transformer = xsltExecutable.Load30();
+            var errorList = new ArrayList();
+            _xsltCompiler.ErrorList = errorList;
+            try
+            {
+                var xsltExecutable = _xsltCompiler.Compile(xslt);
+                _xslt30Transformer = xsltExecutable.Load30();
+            }
+            catch(Exception ex)
+            {
+                var errors = from StaticError se in errorList
+                    select new ErrorMessage(se.Message, se.LineNumber, se.ColumnNumber);
+                throw new XsltException("Error loading XSLT.", ex, errors);
+            }
         }
 
         public void Transform([NotNull] Stream inputXml, [NotNull] Stream output)
@@ -73,8 +85,7 @@ namespace Alphacloud.MSBuild.Xslt
         private void CheckXsltLoaded()
         {
             if (_xslt30Transformer == null)
-                throw new InvalidOperationException(
-                    "XSLT was not loaded. Load XSLT document with LoadXslt().");
+                throw new InvalidOperationException("XSLT was not loaded. Load XSLT document with LoadXslt().");
         }
     }
 }

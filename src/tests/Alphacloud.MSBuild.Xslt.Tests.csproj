@@ -71,6 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SingleFileTransformerXsltErrorReportingTests.cs" />
+    <Compile Include="TestHelpers.cs" />
     <Compile Include="XsltProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +84,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestResources\BrokenTransform.xslt" />
     <Content Include="TestResources\dupFinder.xslt">
       <SubType>Designer</SubType>
     </Content>

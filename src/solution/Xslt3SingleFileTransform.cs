@@ -110,6 +110,16 @@
                         catch (Exception ex)
                         {
                             Log.LogErrorFromException(ex);
+                            // Log Xslt compilation errors if available.
+                            XsltException xe = ex as XsltException;
+                            if (xe != null)
+                            {
+                                var xsltName = Path.GetFileName(Xslt.ItemSpec);
+                                foreach (var xsltError in xe.XsltErrors)
+                                {
+                                    Log.LogError($"{xsltName}({xsltError.LineNumber},{xsltError.ColumnNumber}): {xsltError.Message}");
+                                }
+                            }
                             return false;
                         }
                     }
