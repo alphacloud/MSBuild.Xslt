@@ -4,7 +4,7 @@ XSLT 3 transformation task for MSBuild
 This package provides SAXON-based XSLT 3 transformation tasks for MSBuild.
 This is **tools** package, i.e. no assembly references are added to .NET projects.
 
-Project is based on [Saxon-HE](http://nuget.org/List/Packages/Saxon-HE) .
+Project is based on [Saxon-HE](http://nuget.org/List/Packages/Saxon-HE).
 
 
 ## Installation 
@@ -29,7 +29,6 @@ Install nuget package as usual.
 <Xslt3SingleFileTransform
   Xslt="@(XsltTemplate)" Input="..\..\TestResources\Source.xml"
   Output="result1.xml">
-
 ```
 
 Task parameters:
@@ -45,4 +44,12 @@ Parameters can be passed as [item metadata](https://msdn.microsoft.com/en-us/lib
 Parameters passed within `Input` item will **override** `Xslt` parameters with the same names. This is usefull if same XSLT is used to transform many files and some parameters 
 are specific per input XML file.
 
-Stay tuned.
+
+## Visual Studio intellisense support
+
+Assuming you are running Visual Studio 2015 x64 Windows. Backup and replace `C:\Program Files (x86)\Microsoft Visual Studio 14.0\Xml\Schemas\xslt.xsd` file with `tools\xslt.xsd` from the package.
+
+Please refer to the excellent post from [Steve Evangelista](http://appdevonsharepoint.com/adding-xslt-2-0-intellisense-to-visual-studio/) for detailed information how to enable XSLT intellisense.
+
+---
+*Stay tuned.*
