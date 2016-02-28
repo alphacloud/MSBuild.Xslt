@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.8">
     <id>Alphacloud.MSBuild.Xslt</id>
-    <version>0.1.0.0</version>
+    <version>0.2.1.0</version>
     <title>XSLT 3 transformation for MSBuild.</title>
     <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
