@@ -51,7 +51,7 @@
   </Target>
 
 
-  <Target Name="Package">
+  <Target Name="Pack">
     <RemoveDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     <MakeDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     
