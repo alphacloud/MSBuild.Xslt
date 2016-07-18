@@ -4,8 +4,6 @@
       - master
       - develop
       
-  clone_folder: c:\work\alphacloud.msbuild.xslt.nuget
-  
   pull_requests:
     do_not_increment_build_number: true
 
@@ -45,8 +43,6 @@
 
 
 -      
-  clone_folder: c:\work\alphacloud.msbuild.xslt.dev
-  
   pull_requests:
     do_not_increment_build_number: true
 
