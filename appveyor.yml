@@ -16,7 +16,7 @@
     patch: false
   
   cache:
-    - src\packages -> src\**\packages.config
+    - packages -> src\**\packages.config
 
   install:
     - choco install gitversion.portable -y
