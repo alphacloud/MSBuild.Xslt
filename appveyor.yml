@@ -25,7 +25,7 @@
     - ps: gitversion /l console /output buildserver /updateAssemblyInfo
     
   build_script:
-  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll /p:PackageVersion="%GitVersion_NuGetVersion%'
+  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%'
 
   test:
     assemblies:
@@ -33,7 +33,6 @@
 
   artifacts:
   - path: out/packages/*.nupkg
-    name: Nuget packages
 
   deploy:
   - provider: NuGet
