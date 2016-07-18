@@ -22,7 +22,6 @@
     - choco install gitversion.portable -y
 
   before_build:
-    - nuget restore
     - ps: gitversion /l console /output buildserver /updateAssemblyInfo
     
   build_script:
@@ -61,7 +60,6 @@
     - choco install gitversion.portable -y
 
   before_build:
-    - nuget restore
     - ps: gitversion /l console /output buildserver /updateAssemblyInfo
     
   build_script:
