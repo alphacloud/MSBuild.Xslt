@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alphacloud.MSBuild.Xslt", "solution\Alphacloud.MSBuild.Xslt.csproj", "{02353814-7194-4688-B7E2-B8442DFF88A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alphacloud.MSBuild.Xslt.Tests", "tests\Alphacloud.MSBuild.Xslt.Tests.csproj", "{CA420B82-1FAB-4FC6-82C3-D1A3C345F710}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{167CC99C-AFCE-45A3-B8E2-18C1250813EE}"
+	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+		..\build.proj = ..\build.proj
+		..\GitVersion.yml = ..\GitVersion.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,39 +1,69 @@
-version: 0.2.2-beta-{build}
+- 
+  branches:
+    only:
+      - master
+      - develop
+      
+  pull_requests:
+    do_not_increment_build_number: true
 
-pull_requests:
+  os: Visual Studio 2015
 
-  do_not_increment_build_number: true
+  nuget:
+    disable_publish_on_pr: true
 
-os: Visual Studio 2015
+  assembly_info:
+    patch: false
+  
+  cache:
+    - packages -> src\**\packages.config
 
-nuget:
+  install:
+    - choco install gitversion.portable -pre -y
 
-  disable_publish_on_pr: true
+  before_build:
+    - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+    
+  build_script:
+  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%'
 
-build_script:
+  test:
+    assemblies:
+    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
 
-- cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj'
+  artifacts:
+  - path: out/packages/*.nupkg
 
-test:
+  deploy:
+  - provider: NuGet
+    api_key:
+      secure: yHJuxI0TVZU+g90YoGwOm8Zug7bxKNibC84NLkLusrMMNMcR86qizmvJR81KHtCS
 
-  assemblies:
 
-  - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
+-      
+  pull_requests:
+    do_not_increment_build_number: true
 
-artifacts:
+  os: Visual Studio 2015
 
-- path: out/packages/*.nupkg
+  nuget:
+    disable_publish_on_pr: true
 
-  name: Nuget packages
+  assembly_info:
+    patch: false
+  
+  cache:
+    - packages -> src\**\packages.config
 
-deploy:
+  install:
+    - choco install gitversion.portable -pre -y
 
-- provider: NuGet
+  before_build:
+    - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+    
+  build_script:
+  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll'
 
-  api_key:
-
-    secure: yHJuxI0TVZU+g90YoGwOm8Zug7bxKNibC84NLkLusrMMNMcR86qizmvJR81KHtCS
-
-  on:
-
-    branch: master
+  test:
+    assemblies:
+    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 

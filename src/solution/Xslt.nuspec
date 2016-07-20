@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata minClientVersion="2.8">
     <id>Alphacloud.MSBuild.Xslt</id>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XSTL 3 transformation for MSBuild.</description>
     <releaseNotes>
-Upgraded Saxon to 9.7.0.6.
+Upgraded Saxon to 9.7.0.7.
     </releaseNotes>
     <copyright>Copyright (c) 2016-2016 Alphacloud.net</copyright>
     <tags>alphacloud msbuild xslt xslt-3 xml</tags>
