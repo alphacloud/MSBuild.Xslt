@@ -18,6 +18,9 @@
   cache:
     - packages -> src\**\packages.config
 
+  install:
+    - choco install gitversion.portable -pre -y
+
   before_build:
     - ps: gitversion /l console /output buildserver /updateAssemblyInfo
     
@@ -53,7 +56,7 @@
     - src\packages -> src\**\packages.config
 
   install:
-    - choco install gitversion.portable -y
+    - choco install gitversion.portable -pre -y
 
   before_build:
     - ps: gitversion /l console /output buildserver /updateAssemblyInfo
