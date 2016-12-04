@@ -23,6 +23,7 @@
 
   before_build:
     - ps: C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
+    - ps: appveyor-retry nuget restore src\Alphacloud.MSBuild.Xslt.sln 
     
   build_script:
   - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%'
