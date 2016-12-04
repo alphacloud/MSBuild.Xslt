@@ -1,10 +1,11 @@
 # MSBuild.Xslt
 XSLT 3 transformation task for MSBuild
 
-This package provides SAXON-based XSLT 3 transformation tasks for MSBuild.
+This package provides SAXON-based XSLT 2 and XSLT 3 transformation tasks for MSBuild.
 This is **tools** package, i.e. no assembly references are added to .NET projects.
 
-Project is based on [Saxon-HE](http://nuget.org/List/Packages/Saxon-HE).
+Project uses [Saxon-HE](http://nuget.org/List/Packages/Saxon-HE) to perform XSLT transformation. 
+Please see http://www.saxonica.com/products/products.xml for details on Home Edition.
 
 [![Master branch build](https://ci.appveyor.com/api/projects/status/github/alphacloud/MSBuild.Xslt?branch=master&svg=true)](https://ci.appveyor.com/project/shatl/msbuild-xslt)
 
@@ -17,7 +18,7 @@ Install nuget package as usual.
 
 1. Import targets file 
 ```
-<Import Project="$(MSBuildProjectDirectory)\Packages\Alphacloud.MSBuild.Xslt.0.1.0.0\tools\Alphacloud.MSBuild.Xslt.targets" />
+<Import Project="$(MSBuildProjectDirectory)\Packages\Alphacloud.MSBuild.Xslt.0.3.1\tools\Alphacloud.MSBuild.Xslt.targets" />
 ```
 2. Execute task
 ```
@@ -35,7 +36,7 @@ Install nuget package as usual.
 Task parameters:
 * Input - Source XML file;
 * Xslt - XSL template;
-* OmitXmlDeclatation - omits `<?xml ?>` declaration from output file. Not required if output is configured with `<xsl:output />` instruction.
+* OmitXmlDeclatation - omits `<?xml ... ?>` declaration from output file. Not required if output is configured with `<xsl:output />` instruction.
 * Output - Generated file name.
 
 
