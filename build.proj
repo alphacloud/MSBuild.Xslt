@@ -55,8 +55,6 @@
     <RemoveDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     <MakeDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     
-    <Message Text="##teamcity[progressMessage 'Building NuGet packages...']" />
-    
     <Copy 
       SourceFiles="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)" 
       DestinationFiles="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" 

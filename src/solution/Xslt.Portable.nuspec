@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <metadata minClientVersion="2.8">
-    <id>Alphacloud.MSBuild.Xslt</id>
-    <version>0.2.3.0</version>
+  <metadata>
+    <id>alphacloud.msbuild.xslt.portable</id>
+    <version>0.2.3</version>
     <title>XSLT 2 and 3 transformation for MSBuild.</title>
     <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
@@ -18,4 +18,8 @@ Upgraded Saxon to 9.7.0.13.
     <frameworkAssemblies></frameworkAssemblies>
     <dependencies></dependencies>
   </metadata>
+  <files>
+    <file src="bin\Release\*.dll" target="tools" />
+    <file src="bin\Release\*.targets" target="tools" />
+  </files>
 </package>
