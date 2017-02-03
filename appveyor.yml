@@ -4,6 +4,8 @@
       - master
       - develop
       
+  skip_tags: true
+
   pull_requests:
     do_not_increment_build_number: true
 
@@ -44,7 +46,7 @@
       nuget setApiKey $env:NUGET_KEY -verbosity quiet;
       appveyor-retry nuget push out\packages\Alphacloud.MSBuild.Xslt.$version.nupkg -source https://www.nuget.org/api/v2/package/ ;
       cd src\solution ;
-      if ($env:APPVEYOR_REPO_BRANCH -eq 'master' -And $env:APPVEYOR_REPO_TAG -eq 'true') {
+      if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
         choco pack xslt.portable.nuspec --version $version ;
         choco apiKey -k $env:CHOCOLATEY_KEY -source https://chocolatey.org/ ;
         appveyor-retry choco push alphacloud.msbuild.xslt.portable.$version.nupkg
