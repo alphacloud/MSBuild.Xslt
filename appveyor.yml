@@ -14,10 +14,13 @@
 
   assembly_info:
     patch: false
-  
-  cache:
-    - packages -> src\**\packages.config
 
+  environment:
+    CHOCOLATEY_KEY:
+      secure: 9M5HbeG8Cc5XbyirU+F+mVmtVP1tJ9WB8n4s3ATg+doSkUNODnFZ0LAdR44o2Jcd
+    NUGET_KEY:
+      secure: yDtlwZxOr+meDM0iMA3pWo3VO+t2oRDIjf+accbVz3N2NO74W6yhF7lgRjw9B2Ek
+    
   install:
     - choco install gitversion.portable -pre -y
 
@@ -35,12 +38,18 @@
   artifacts:
   - path: out/packages/*.nupkg
 
-  deploy:
-  - provider: NuGet
-    api_key:
-      secure: yHJuxI0TVZU+g90YoGwOm8Zug7bxKNibC84NLkLusrMMNMcR86qizmvJR81KHtCS
-
-
+  deploy_script:
+  - ps: >-
+      $version = $env:GitVersion_NuGetVersion ;
+      nuget setApiKey $env:NUGET_KEY -verbosity quiet;
+      appveyor-retry nuget push out\packages\Alphacloud.MSBuild.Xslt.$version.nupkg -source https://www.nuget.org/api/v2/package/ ;
+      cd src\solution ;
+      if ($env:APPVEYOR_REPO_BRANCH -eq 'master' -And $env:APPVEYOR_REPO_TAG -eq 'true') {
+        choco pack xslt.portable.nuspec --version $version ;
+        choco apiKey -k $env:CHOCOLATEY_KEY -source https://chocolatey.org/ ;
+        appveyor-retry choco push alphacloud.msbuild.xslt.portable.$version.nupkg
+      }
+      
 -      
   pull_requests:
     do_not_increment_build_number: true
