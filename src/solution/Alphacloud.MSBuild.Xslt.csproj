@@ -45,8 +45,8 @@
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="saxon9he-api, Version=9.7.0.13, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Saxon-HE.9.7.0.13\lib\net40\saxon9he-api.dll</HintPath>
+    <Reference Include="saxon9he-api, Version=9.7.0.14, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Saxon-HE.9.7.0.14\lib\net40\saxon9he-api.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,8 +69,11 @@
     <None Include="Alphacloud.MSBuild.Xslt.targets">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Xslt.nuspec" />
+    <None Include="Xslt.Portable.nuspec" />
     <None Include="xslt.xsd">
       <SubType>Designer</SubType>
     </None>
