@@ -49,7 +49,7 @@
       if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
         choco pack xslt.portable.nuspec --version $version ;
         choco apiKey -k $env:CHOCOLATEY_KEY -source https://chocolatey.org/ ;
-        appveyor-retry choco push alphacloud.msbuild.xslt.portable.$version.nupkg
+        appveyor-retry choco push msbuild-xslt.portable.$version.nupkg
       }
       
 -      
