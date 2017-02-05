@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>alphacloud.msbuild.xslt.portable</id>
-    <version>0.2.3</version>
+    <id>msbuild-xslt.portable</id>
+    <version>0.3.3</version>
     <title>XSLT 2 and 3 transformation for MSBuild.</title>
     <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/alphacloud/MSBuild.Xslt</projectUrl>
+    <projectSourceUrl>https://github.com/alphacloud/MSBuild.Xslt</projectSourceUrl>
+    <packageSourceUrl>https://chocolatey.org/packages/alphacloud-msbuild-xslt.portable</packageSourceUrl>
+    <bugTrackerUrl>https://github.com/alphacloud/MSBuild.Xslt/issues</bugTrackerUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XSTL 2 and 3 transformation for MSBuild.</description>
+    <summary>XSTL 2 and 3 transformation for MSBuild.</summary>
     <releaseNotes>
 Upgraded Saxon to 9.7.0.14.
     </releaseNotes>
@@ -19,7 +23,7 @@ Upgraded Saxon to 9.7.0.14.
     <dependencies></dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\*.dll" target="tools" />
-    <file src="bin\Release\*.targets" target="tools" />
+    <file src="bin/Release/*.dll" target="tools" />
+    <file src="bin/Release/*.targets" target="tools" />
   </files>
 </package>
