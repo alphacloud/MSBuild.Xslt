@@ -46,8 +46,8 @@
       nuget setApiKey $env:NUGET_KEY -verbosity quiet;
       appveyor-retry nuget push out\packages\Alphacloud.MSBuild.Xslt.$version.nupkg -source https://www.nuget.org/api/v2/package/ ;
       cd src\solution ;
+      choco pack xslt.portable.nuspec --version $version ;
       if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
-        choco pack xslt.portable.nuspec --version $version ;
         choco apiKey -k $env:CHOCOLATEY_KEY -source https://chocolatey.org/ ;
         appveyor-retry choco push msbuild-xslt.portable.$version.nupkg
       }
