@@ -3,7 +3,7 @@
   <metadata>
     <id>msbuild-xslt.portable</id>
     <version>0.3.3</version>
-    <title>XSLT 2 and 3 transformation for MSBuild.</title>
+    <title>XSLT 2 and 3 transformation for MSBuild</title>
     <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
@@ -23,7 +23,7 @@ Upgraded Saxon to 9.7.0.14.
     <dependencies></dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\*.dll" target="tools" />
-    <file src="bin\Release\*.targets" target="tools" />
+    <file src="bin\Release\net46\*.dll" target="tools" />
+    <file src="*.targets" target="tools" />
   </files>
 </package>
