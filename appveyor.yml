@@ -9,7 +9,7 @@
   pull_requests:
     do_not_increment_build_number: true
 
-  os: Visual Studio 2015
+  os: Visual Studio 2017
 
   nuget:
     disable_publish_on_pr: true
@@ -18,24 +18,34 @@
     patch: false
 
   environment:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
     CHOCOLATEY_KEY:
       secure: 9M5HbeG8Cc5XbyirU+F+mVmtVP1tJ9WB8n4s3ATg+doSkUNODnFZ0LAdR44o2Jcd
     NUGET_KEY:
       secure: yDtlwZxOr+meDM0iMA3pWo3VO+t2oRDIjf+accbVz3N2NO74W6yhF7lgRjw9B2Ek
     
   install:
-    - choco install gitversion.portable -pre -y
+    - choco install gitversion.portable -pre -y --no-progress
 
   before_build:
-    - ps: C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
-    - ps: appveyor-retry nuget restore src\Alphacloud.MSBuild.Xslt.sln 
-    
+    - ps: >-
+        C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
+
+        cd /projects/msbuild-xslt/src 
+
+        dotnet restore
+
   build_script:
-  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%'
+  - cmd: >-
+      cd /projects/msbuild-xslt
+      
+      MSBuild.exe build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%
+      
 
   test:
     assemblies:
-    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
+    - src\tests\bin\Release\**\Alphacloud.MSBuild.Xslt.Tests.dll 
 
   artifacts:
   - path: out/packages/*.nupkg
@@ -56,7 +66,7 @@
   pull_requests:
     do_not_increment_build_number: true
 
-  os: Visual Studio 2015
+  os: Visual Studio 2017
 
   nuget:
     disable_publish_on_pr: true
@@ -64,18 +74,23 @@
   assembly_info:
     patch: false
   
-  cache:
-    - packages -> src\**\packages.config
-
   install:
-    - choco install gitversion.portable -pre -y
+    - choco install gitversion.portable -pre -y --no-progress
 
   before_build:
-    - ps: gitversion /l console /output buildserver /updateAssemblyInfo
-    
+    - ps: >-
+        C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
+
+        cd /projects/msbuild-xslt/src 
+
+        dotnet restore
+
   build_script:
-  - cmd: '"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" build.proj /t:BuildAll'
+  - cmd: >-
+      cd /projects/msbuild-xslt
+      
+      MSBuild.exe build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%
 
   test:
     assemblies:
-    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
+    - src\tests\bin\Release\**\Alphacloud.MSBuild.Xslt.Tests.dll 

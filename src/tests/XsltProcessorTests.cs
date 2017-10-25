@@ -7,7 +7,6 @@ namespace Alphacloud.MSBuild.Xslt.Tests
     using System.IO;
     using System.Text;
     using NUnit.Framework;
-    using Properties;
     using Saxon.Api;
 
     [TestFixture]
@@ -36,10 +35,10 @@ namespace Alphacloud.MSBuild.Xslt.Tests
         public void CanTransformWithXmlWriter()
         {
             
-            var xslt = _compiler.Compile(TestHelpers.ToStream(Resources.XsltDupFinder));
+            var xslt = _compiler.Compile(TestHelpers.LoadResource("dupFinder.xslt"));
             var transformer = xslt.Load30();
             var xdm = TestHelpers.CreateFileOutput(@"result.html");
-            transformer.ApplyTemplates(TestHelpers.ToStream(Resources.XmlDupReport), xdm);
+            transformer.ApplyTemplates(TestHelpers.LoadResource("dupReport.xml"), xdm);
         }
 
         Serializer CreateStringSerializer(StringBuilder sb)
@@ -50,19 +49,19 @@ namespace Alphacloud.MSBuild.Xslt.Tests
         [Test]
         public void CanTransformWithSerializer()
         {
-            var transformer = LoadXslt(Resources.XsltDupFinder);
+            var transformer = LoadXslt(TestHelpers.LoadResource("dupFinder.xslt"));
             var serializer = _processor.NewSerializer();
             serializer.SetOutputProperty(Serializer.SAXON_INDENT_SPACES, "1");
             serializer.SetOutputProperty(Serializer.INDENT, "yes");
             serializer.SetOutputProperty(Serializer.OMIT_XML_DECLARATION, "yes");
             
             serializer.SetOutputFile(Path.Combine(TestContext.CurrentContext.TestDirectory, "serializer-result.html"));
-            transformer.ApplyTemplates(TestHelpers.ToStream(Resources.XmlDupReport), serializer);
+            transformer.ApplyTemplates(TestHelpers.LoadResource("dupReport.xml"), serializer);
         }
 
-        private Xslt30Transformer LoadXslt(string xslt)
+        private Xslt30Transformer LoadXslt(Stream xslt)
         {
-            var xsltExecutable = _compiler.Compile(TestHelpers.ToStream(xslt));
+            var xsltExecutable = _compiler.Compile(xslt);
             var transformer = xsltExecutable.Load30();
             return transformer;
         }
