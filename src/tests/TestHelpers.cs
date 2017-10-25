@@ -1,5 +1,8 @@
 // ReSharper disable PublicMembersMustHaveComments
 // ReSharper disable HeapView.ObjectAllocation.Evident
+// ReSharper disable ExceptionNotDocumented
+// ReSharper disable AssignNullToNotNullAttribute
+// ReSharper disable PossibleNullReferenceException
 namespace Alphacloud.MSBuild.Xslt.Tests
 {
     using System.IO;
@@ -10,6 +13,16 @@ namespace Alphacloud.MSBuild.Xslt.Tests
 
     public static class TestHelpers
     {
+
+        public static MemoryStream LoadResource(string resourceName)
+        {
+            var assembly = typeof(TestHelpers).Assembly;
+            var resourceStream = assembly.GetManifestResourceStream("Alphacloud.MSBuild.Xslt.Tests.TestResources."+ resourceName);
+            var data = new byte[resourceStream.Length];
+            resourceStream.Read(data, 0, (int) resourceStream.Length);
+            return new MemoryStream(data);
+        }
+
         public static Stream ToStream(string contents)
         {
             return new MemoryStream(Encoding.UTF8.GetBytes(contents));

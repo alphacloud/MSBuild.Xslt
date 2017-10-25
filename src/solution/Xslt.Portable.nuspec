@@ -3,7 +3,7 @@
   <metadata>
     <id>msbuild-xslt.portable</id>
     <version>0.3.3</version>
-    <title>XSLT 2 and 3 transformation for MSBuild.</title>
+    <title>XSLT 2 and 3 transformation for MSBuild</title>
     <authors>Alphacloud.net</authors>
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
