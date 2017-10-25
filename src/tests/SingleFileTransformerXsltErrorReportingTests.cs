@@ -10,7 +10,6 @@ namespace Alphacloud.MSBuild.Xslt.Tests
     using System.Linq;
     using FluentAssertions;
     using NUnit.Framework;
-    using Properties;
 
     [TestFixture]
     internal class SingleFileTransformerXsltErrorReportingTests
@@ -39,7 +38,7 @@ namespace Alphacloud.MSBuild.Xslt.Tests
                 "An xsl:key element must either have a @use attribute or have content"
             };
 
-            Action load = () => _transformer.LoadXslt(TestHelpers.ToStream(Resources.BrokenTransform));
+            Action load = () => _transformer.LoadXslt(TestHelpers.LoadResource("BrokenTransform.xslt"));
             load.ShouldThrow<XsltException>()
                 .Which.XsltErrors
                 .Should().OnlyContain(e => errors.Contains(e.Message));
