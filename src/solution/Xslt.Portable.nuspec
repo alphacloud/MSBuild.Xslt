@@ -23,7 +23,7 @@ Upgraded Saxon to 9.7.0.14.
     <dependencies></dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\*.dll" target="tools" />
-    <file src="bin\Release\*.targets" target="tools" />
+    <file src="bin\Release\net46\*.dll" target="tools" />
+    <file src="*.targets" target="tools" />
   </files>
 </package>
