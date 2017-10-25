@@ -18,6 +18,8 @@
     patch: false
 
   environment:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: true
     CHOCOLATEY_KEY:
       secure: 9M5HbeG8Cc5XbyirU+F+mVmtVP1tJ9WB8n4s3ATg+doSkUNODnFZ0LAdR44o2Jcd
     NUGET_KEY:
@@ -27,15 +29,23 @@
     - choco install gitversion.portable -pre -y --no-progress
 
   before_build:
-    - ps: C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
-    - ps: appveyor-retry nuget restore src\Alphacloud.MSBuild.Xslt.sln 
-    
+    - ps: >-
+        C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
+
+        cd /projects/msbuild-xslt/src 
+
+        dotnet restore
+
   build_script:
-  - cmd: 'MSBuild.exe build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%'
+  - cmd: >-
+      cd /projects/msbuild-xslt
+      
+      MSBuild.exe build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%
+      
 
   test:
     assemblies:
-    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
+    - src\tests\bin\Release\**\Alphacloud.MSBuild.Xslt.Tests.dll 
 
   artifacts:
   - path: out/packages/*.nupkg
@@ -68,11 +78,19 @@
     - choco install gitversion.portable -pre -y --no-progress
 
   before_build:
-    - ps: gitversion /l console /output buildserver /updateAssemblyInfo
-    
+    - ps: >-
+        C:\ProgramData\chocolatey\bin\gfv.exe /l console /output buildserver /updateAssemblyInfo
+
+        cd /projects/msbuild-xslt/src 
+
+        dotnet restore
+
   build_script:
-  - cmd: 'MSBuild.exe build.proj /t:BuildAll'
+  - cmd: >-
+      cd /projects/msbuild-xslt
+      
+      MSBuild.exe build.proj /t:BuildAll;Pack /p:PackageVersion="%GitVersion_NuGetVersion%
 
   test:
     assemblies:
-    - src\tests\bin\Release\Alphacloud.MSBuild.Xslt.Tests.dll 
+    - src\tests\bin\Release\**\Alphacloud.MSBuild.Xslt.Tests.dll 

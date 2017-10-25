@@ -87,7 +87,7 @@
     
 
   
-  <Target Name="BuildAll" DependsOnTargets="RestorePackages">
+  <Target Name="BuildAll">
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=$(BuildConfig);CreateHardLinksForCopyLocalIfPossible=true" Targets="$(BuildTarget)"
              BuildInParallel="true" />
   </Target>
