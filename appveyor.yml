@@ -21,7 +21,7 @@
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
     DOTNET_CLI_TELEMETRY_OPTOUT: true
     CHOCOLATEY_KEY:
-      secure: 9M5HbeG8Cc5XbyirU+F+mVmtVP1tJ9WB8n4s3ATg+doSkUNODnFZ0LAdR44o2Jcd
+      secure: zsCo+MezT49Po6nbs/6g38EVxhk7Y3bF7iQTvIwooh3jP8VzEbhp+S/09VviZEOQ
     NUGET_KEY:
       secure: yDtlwZxOr+meDM0iMA3pWo3VO+t2oRDIjf+accbVz3N2NO74W6yhF7lgRjw9B2Ek
     
