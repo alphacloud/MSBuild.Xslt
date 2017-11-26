@@ -54,7 +54,8 @@
   - ps: >-
       $version = $env:GitVersion_NuGetVersion ;
       nuget setApiKey $env:NUGET_KEY -verbosity quiet;
-      appveyor-retry nuget push out\packages\Alphacloud.MSBuild.Xslt.$version.nupkg -source https://www.nuget.org/api/v2/package/ ;
+      cd out\packages ;
+      ..\..\nuget-push-new.ps1 Alphacloud.MSBuild.Xslt $env:NUGET_KEY  https://api.nuget.org/v3/index.json ;
       cd src\solution ;
       choco pack xslt.portable.nuspec --version $version ;
       if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
