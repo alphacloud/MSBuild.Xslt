@@ -35,12 +35,12 @@
   <Import Project="$(RootDir)\PackageDefinitions.xml" />
 
   <Target Name="RestorePackages">
-  <Exec WorkingDirectory="$(SrcDir)"
-    Command="$(NuGetExe) restore $(SolutionName).sln" />
+    <Exec WorkingDirectory="$(SrcDir)"
+      Command="$(NuGetExe) restore $(SolutionName).sln" />
   </Target>
 
   <Target Name="CleanAll">
-  <Message Text="Performing full clean-up..." />
+    <Message Text="Performing full clean-up..." />
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=Debug" Targets="Clean"  BuildInParallel="true" />
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=Release" Targets="Clean" BuildInParallel="true" />
     <DeleteTree Directories="$(SrcDir)\**\bin\**;$(SrcDir)\**\obj\**;$(OutputDir);$(RootDir)\packages\**" />
@@ -62,10 +62,17 @@
     />
 
     <ItemGroup>
-      <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\*.*;"
-    Exclude="$(SrcDir)\solution\bin\Release\*.pdb;$(SrcDir)\solution\bin\Release\*.xml;$(SrcDir)\solution\bin\Release\Jetbrains.*.*"
-    >
+      <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\*.*"
+        Exclude="
+          $(SrcDir)\solution\bin\Release\**\*.xml;
+          $(SrcDir)\solution\bin\Release\**\Jetbrains*.*;
+          $(SrcDir)\solution\bin\Release\**\Microsoft*.*;
+          $(SrcDir)\solution\bin\Release\**\System*.*;
+          "
+      >
           <NuspecDir>%(PackageDefinition.Identity)\tools\</NuspecDir>
+      </PackageFiles>
+      <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\Alphacloud*.pdb">
       </PackageFiles>
     </ItemGroup>
 
@@ -80,7 +87,11 @@
       DestinationFolder="$(PackagesSrcDir)\%(PackageFiles.NuspecDir)\"
       UseHardlinksIfPossible="true" OverwriteReadOnlyFiles="true" Retries="5"
     />
-
+    <Copy
+      SourceFiles="$(RootDir)\LICENSE"
+      DestinationFiles="$(SrcDir)\solution\LICENSE.txt"
+      UseHardlinksIfPossible="true" OverwriteReadOnlyFiles="true" Retries="5"
+    />
     <NuGetPack File="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" OutputDirectory="$(PackagesOutDir)" Version="$(PackageVersion)"  />
   </Target>
 
