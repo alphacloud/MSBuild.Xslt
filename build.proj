@@ -8,44 +8,44 @@
 
   <!-- Directories -->
   <PropertyGroup>
-	<SolutionName>Alphacloud.MSBuild.Xslt</SolutionName>
+    <SolutionName>Alphacloud.MSBuild.Xslt</SolutionName>
   </PropertyGroup>
-  
+
   <!-- calculated properties -->
   <PropertyGroup>
     <RootDir>$(MSBuildProjectDirectory)</RootDir>
     <SrcDir>$(RootDir)\src</SrcDir>
-	<TestsDir>$(SrcDir}\tests</TestsDir>
-	<BuildToolsDir>$(SrcDir)\.build</BuildToolsDir>
+    <TestsDir>$(SrcDir}\tests</TestsDir>
+    <BuildToolsDir>$(SrcDir)\.build</BuildToolsDir>
     <NuGetExe>$(BuildToolsDir)\NuGet.exe</NuGetExe>
-	
+
     <OutputDir>$(RootDir)\out</OutputDir>
     <PackagesOutDir>$(OutputDir)\packages</PackagesOutDir>
     <PackagesSrcDir>$(OutputDir)\nuget</PackagesSrcDir>
 
-	<MainSolution>$(SrcDir)\$(SolutionName).sln</MainSolution>
+  <MainSolution>$(SrcDir)\$(SolutionName).sln</MainSolution>
   </PropertyGroup>
 
   <!-- imports -->
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(BuildToolsDir)</MSBuildCommunityTasksPath>
   </PropertyGroup>
-  
+
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets" />
   <Import Project="$(RootDir)\PackageDefinitions.xml" />
-    
+
   <Target Name="RestorePackages">
-	<Exec WorkingDirectory="$(SrcDir)"
-	  Command="$(NuGetExe) restore $(SolutionName).sln" />
+    <Exec WorkingDirectory="$(SrcDir)"
+      Command="$(NuGetExe) restore $(SolutionName).sln" />
   </Target>
-  
+
   <Target Name="CleanAll">
-	<Message Text="Performing full clean-up..." />
+    <Message Text="Performing full clean-up..." />
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=Debug" Targets="Clean"  BuildInParallel="true" />
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=Release" Targets="Clean" BuildInParallel="true" />
     <DeleteTree Directories="$(SrcDir)\**\bin\**;$(SrcDir)\**\obj\**;$(OutputDir);$(RootDir)\packages\**" />
   </Target>
-  
+
   <Target Name="CreateFolders">
     <MakeDir Directories="$(PackagesOutDir);$(PackagesSrcDir)" />
   </Target>
@@ -54,13 +54,13 @@
   <Target Name="Pack">
     <RemoveDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
     <MakeDir Directories="$(PackagesSrcDir);$(PackagesOutDir)" ContinueOnError="true" />
-    
-    <Copy 
-      SourceFiles="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)" 
-      DestinationFiles="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" 
+
+    <Copy
+      SourceFiles="%(PackageDefinition.RootFolder)\%(PackageDefinition.NuspecFile)"
+      DestinationFiles="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)"
       UseHardlinksIfPossible="false" OverwriteReadOnlyFiles="true" Retries="5"
     />
-    
+
     <ItemGroup>
       <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\*.*"
         Exclude="
@@ -69,22 +69,22 @@
           $(SrcDir)\solution\bin\Release\**\Microsoft*.*;
           $(SrcDir)\solution\bin\Release\**\System*.*;
           "
-		>
+      >
           <NuspecDir>%(PackageDefinition.Identity)\tools\</NuspecDir>
       </PackageFiles>
       <PackageFiles Include="$(SrcDir)\solution\bin\Release\**\Alphacloud*.pdb">
       </PackageFiles>
     </ItemGroup>
-    
+
     <!-- set dependency version in NuSpec files -->
     <ItemGroup>
         <NuSpecFiles Include="$(PackagesSrcDir)\**\*.nuspec">
         </NuSpecFiles>
     </ItemGroup>
 
-    <Copy 
-      SourceFiles="@(PackageFiles)" 
-      DestinationFolder="$(PackagesSrcDir)\%(PackageFiles.NuspecDir)\" 
+    <Copy
+      SourceFiles="@(PackageFiles)"
+      DestinationFolder="$(PackagesSrcDir)\%(PackageFiles.NuspecDir)\"
       UseHardlinksIfPossible="true" OverwriteReadOnlyFiles="true" Retries="5"
     />
     <Copy
@@ -94,7 +94,7 @@
     />
     <NuGetPack File="$(PackagesSrcDir)\%(PackageDefinition.Identity)\%(PackageDefinition.NuspecFile)" OutputDirectory="$(PackagesOutDir)" Version="$(PackageVersion)"  />
   </Target>
-    
+
 
   <Target Name="BuildAll">
     <MSBuild Projects="$(MainSolution)" Properties="Configuration=$(BuildConfig);CreateHardLinksForCopyLocalIfPossible=true" Targets="$(BuildTarget)"
