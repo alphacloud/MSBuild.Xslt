@@ -8,7 +8,7 @@
     <owners>Alphacloud.net</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/alphacloud/MSBuild.Xslt</projectUrl>
-    <projectSourceUrl>https://github.com/alphacloud/MSBuild.Xslt</projectSourceUrl>
+    <projectSourceUrl>https://github.com/alphacloud/MSBuild.Xslt/tree/master/</projectSourceUrl>
     <packageSourceUrl>https://chocolatey.org/packages/alphacloud-msbuild-xslt.portable</packageSourceUrl>
     <bugTrackerUrl>https://github.com/alphacloud/MSBuild.Xslt/issues</bugTrackerUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -24,6 +24,8 @@ Upgraded Saxon to 9.7.0.14.
   </metadata>
   <files>
     <file src="bin\Release\net46\*.dll" target="tools" />
+    <file src="LICENSE.txt" target="tools" />
+    <file src="VERIFICATION.txt" target="tools" />
     <file src="*.targets" target="tools" />
   </files>
 </package>
